@@ -1,0 +1,140 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    font-size: 16px;
+}
+
+body {
+    height: 100vh;
+    background-image: url(images/solar-system.png);
+    background-repeat: no-repeat;
+    background-size:cover;
+    /* backdrop-filter: blur(1px); */
+    background-color: white;
+    font-family: sans-serif, arial;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: baseline;
+}
+body::selection{
+    background-color: transparent;
+    color: black;
+}
+#input-cont {
+    align-self: center;
+}
+#inpt {
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 7px;
+    outline: none;
+    box-shadow: 1px 2px 0 rgba(0, 0, 0, 0.4);
+}
+
+#add-btn {
+    padding: 10px;
+    border: none;
+    background-color: rgb(0, 162, 255);
+    border-radius: 7px;
+    margin: 10px;
+    box-shadow: 1px 2px 0 rgba(0, 0, 0, 0.4);
+}
+#master-cont{
+    width: 100%;
+    display: flex;
+}
+
+#tasks-cont {
+    position: relative;
+    left: 0;
+    margin: 10px;
+    width: 100%;
+}
+
+.guide {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    margin: 20px;
+    padding: 20px;
+    justify-self: flex-end;
+    width: 40vw;
+    height: 70vh;
+    background-color: #cfcfcf57;
+    border: 1px solid gray;
+    border-radius: 10px;
+    backdrop-filter: blur(2px);
+    color: white;
+    overflow: auto;
+}
+.guide li {
+    word-spacing: 7px;
+    line-height: 25px;
+    list-style: none;
+    margin: 20px 0;
+}
+.guide code {
+    padding: 0 5px;
+    background-color: white;
+    border-radius: 3px;
+    color: black;
+}
+
+
+/* JavaScript Styles */
+
+.new-task {
+    position: relative;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.5rem;
+    padding: 20px;
+    height: fit-content;
+    min-width: 400px;
+    min-height: 40px;
+    background: linear-gradient(45deg, #ffffffee, #bebebe);
+    border: 1px solid gray;
+    border-radius: 5px;
+    box-shadow: 2px 2px #eeeeee7c;
+    margin: 20px;
+}
+
+.new-text {
+    font-weight: normal;
+    font-family: sans-serif;
+    font-size: 20px;
+    outline: none;
+}
+
+.checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 30px;
+    height: 30px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    position: relative;
+}
+.checkbox:checked {
+    background-color: #24e224;
+}
+.checkbox:checked::after {
+    position: absolute;
+    top: -15px;
+    bottom: 0;
+    content: '';
+    clip-path: polygon(12% 66%, 29% 85%, 59% 46%, 64% 52%, 30% 98%, 7% 73%);
+    background-color: white;
+    border-radius: 5px;
+    width: 40px;
+    height: 40px;
+}
+.line-through {
+    text-decoration: line-through;
+}
