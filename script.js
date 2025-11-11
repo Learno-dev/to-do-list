@@ -98,7 +98,7 @@ function nodeConvert() {
         })
 
         newText.addEventListener('dblclick', (e) => {
-            if (checkbox.checked == false) {
+            if (checkbox.classList.contains('checked') == false) {
                 old_text = newText.innerHTML;
                 for (const ar of arr) {
                     if (ar.task == old_text) {
