@@ -121,10 +121,10 @@ body::selection{
     border-radius: 5px;
     position: relative;
 }
-.checkbox:checked {
+.checked {
     background-color: #24e224;
 }
-.checkbox:checked::after {
+.checked::after {
     position: absolute;
     top: -15px;
     bottom: 0;

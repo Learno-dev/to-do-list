@@ -30,6 +30,7 @@ document.addEventListener('keydown', (e) => {
                 }
             }
         })
+        saveTasks();
         nodeConvert()
     }
 })
@@ -38,6 +39,9 @@ let old_text = '';
 let new_text = '';
 // create tasks
 let arr = [];
+if(localStorage.getItem('tasks') != null && localStorage.getItem('completed') != null){
+    grabSavedTasks()
+}
 function createTask() {
     let obj = {
         task: properCase(inpt.value),
@@ -45,14 +49,15 @@ function createTask() {
     }
     // if(String(inpt.value).trim()){
     if (String(inpt.value).trim().length != 0){
+        console.log(arr)
         let isDuplicate = arr.some(element => String(element.task).trim().toLocaleLowerCase() == String(obj.task).trim().toLowerCase());
-
         if (!isDuplicate) {
             arr.push(obj)
         } else {
             alert('Task already exists')
         }
     }
+    saveTasks()
     // }
     inpt.value = '';
     nodeConvert()
@@ -62,7 +67,7 @@ function nodeConvert() {
     tasksCont.innerHTML = ''
     for (let arrElement of arr) {
         const newTask = document.createElement('div')
-        const checkbox = document.createElement('input');
+        const checkbox = document.createElement('div');
         const newText = document.createElement('pre');
 
         // new task
@@ -74,15 +79,22 @@ function nodeConvert() {
         newText.classList.add('new-text')
         newTask.append(newText);
         // checkbox
-        checkbox.setAttribute('type', 'checkbox');
         checkbox.classList.add('checkbox');
+        if(arrElement.completed){
+            checkbox.classList.add('checked')
+            newText.classList.add('line-through')
+        } else {
+            newText.classList.remove('line-through')
+        }
         newTask.append(checkbox);
 
 
         checkbox.addEventListener('click', (e) => {
             e.stopPropagation()
-            arrElement.completed = checkbox.checked;
-            newText.classList.toggle('line-through')
+            checkbox.classList.toggle('checked')
+            arrElement.completed = checkbox.classList.contains('checked');
+                newText.classList.toggle('line-through');
+            saveTasks()
         })
 
         newText.addEventListener('dblclick', (e) => {
@@ -120,12 +132,39 @@ function removeTask(){
                     newTask.remove()
                 }
             }
+            saveTasks()
         })
     }
 }
+// DONE // save the 'arr' to localStorage
+function saveTasks (){
+    let tasks = [];
+    let completed = [];
 
-// save the 'arr' to localStorage
-
+    for(const ar of arr){
+        tasks.push(ar.task)
+        completed.push(ar.completed)
+    }
+    localStorage.setItem('tasks',tasks)
+    localStorage.setItem('completed',completed)
+}
+function grabSavedTasks(){
+    let tasksArr = localStorage.getItem('tasks').split(',')
+    let oldCompletedArr = localStorage.getItem('completed').split(',');
+    let completedArr = [];
+    for(const completedAr of oldCompletedArr){
+        completedArr.push(eval(completedAr))
+    }
+    for (let i = 0; i <= tasksArr.length; i++) {
+        let obj = {
+            task: String(tasksArr.splice(0,1)),
+            completed: eval(String(oldCompletedArr.splice(0,1)))
+        }
+        arr.push(obj)
+    }
+    console.log(arr)
+    nodeConvert()
+}
 // move the tasks to the end when checked
 
 // 
